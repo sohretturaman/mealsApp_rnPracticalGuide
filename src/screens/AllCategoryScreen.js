@@ -24,7 +24,6 @@ function AllCategoryScreen() {
   };
   return (
     <View style={styles.container}>
-      <Text>AllCategoryScreen</Text>
       <View style={styles.itemContiner}>
         <FlatList
           key={key}
@@ -44,6 +43,6 @@ export default AllCategoryScreen;
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: '#24180f',
+    backgroundColor: '#482A15',
   },
 });

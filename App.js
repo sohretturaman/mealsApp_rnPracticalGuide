@@ -4,6 +4,7 @@ import AllCategoryScreen from './src/screens/AllCategoryScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import CategoryDetails from './src/screens/CategoryDetails';
+import MealDetails from './src/screens/MealDetails';
 
 const Stack = createStackNavigator();
 const App = () => {
@@ -11,9 +12,22 @@ const App = () => {
     <>
       <StatusBar barStyle={'light-content'} />
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="AllCategories" component={AllCategoryScreen} />
-          <Stack.Screen name="CategoryDetails" component={CategoryDetails} />
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {backgroundColor: '#714209'},
+            headerTintColor: 'white',
+          }}>
+          <Stack.Screen
+            name="AllCategories"
+            component={AllCategoryScreen}
+            options={{title: 'Categories'}}
+          />
+          <Stack.Screen
+            name="CategoryDetails"
+            component={CategoryDetails}
+            // options={{title: 'Meals Overview'}}
+          />
+          <Stack.Screen name="mealDetails" component={MealDetails} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
