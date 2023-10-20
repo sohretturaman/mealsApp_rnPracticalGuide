@@ -1,10 +1,11 @@
 import {Pressable, StyleSheet, Text, View, Platform} from 'react-native';
 import React from 'react';
 
-const CategoriesTitle = ({item, color}) => {
+const CategoriesTitle = ({item, color, onPress}) => {
   return (
     <View style={[styles.titleContainer, {backgroundColor: color}]}>
       <Pressable
+        onPress={onPress}
         android_ripple={{color: '#ccc'}}
         style={({pressed}) => [
           styles.button,
