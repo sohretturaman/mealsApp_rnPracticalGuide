@@ -4,21 +4,28 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {MEALS} from '../data/dummy-data';
 import ListComponent from '../components/ListComponent';
 import {ScrollView} from 'react-native-virtualized-view';
+import SubTitlesComp from '../components/SubTitlesComp';
 
 const MealDetails = () => {
   const route = useRoute();
   const mealId = route.params.mealId;
 
   const data = MEALS.find(item => item.id === mealId);
-  // console.log('data from meals', data.ingredients);
+  // console.log('data from meals,image', data.imageUrl);
 
   return (
     <ScrollView>
       <View style={styles.container}>
         <View>
           <Image source={{uri: data.imageUrl}} style={styles.imageStyle} />
-        </View>
 
+          <SubTitlesComp
+            complexity={data.complexity}
+            affordability={data.affordability}
+            duration={data.duration}
+            style={styles.subtitleColor}
+          />
+        </View>
         <Text style={styles.title}>{data.title}</Text>
 
         <View style={styles.contentWrapper}>
@@ -43,6 +50,7 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 5,
     marginBottom: 5,
+    resizeMode: 'cover',
   },
   container: {
     backgroundColor: '#482A15',
@@ -66,5 +74,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     marginHorizontal: 10,
+  },
+  subtitleColor: {
+    color: 'white',
   },
 });

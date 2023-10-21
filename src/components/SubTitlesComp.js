@@ -1,12 +1,12 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const SubTitlesComp = props => {
+const SubTitlesComp = ({complexity, affordability, duration, style}) => {
   return (
     <View style={styles.subTitleWrapper}>
-      <Text style={styles.subtitle}>{props.complexity} </Text>
-      <Text style={styles.subtitle}>{props.affordability}</Text>
-      <Text style={styles.subtitle}>{props.duration} min </Text>
+      <Text style={[styles.subtitle, style]}>{complexity} </Text>
+      <Text style={[styles.subtitle, style]}>{affordability}</Text>
+      <Text style={[styles.subtitle, style]}>{duration} min </Text>
     </View>
   );
 };
