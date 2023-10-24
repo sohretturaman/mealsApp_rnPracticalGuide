@@ -1,4 +1,10 @@
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import AllCategoryScreen from './src/screens/AllCategoryScreen';
 import {NavigationContainer} from '@react-navigation/native';
@@ -8,6 +14,7 @@ import MealDetails from './src/screens/MealDetails';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import FavouriteScreen from './src/screens/FavouriteScreen';
 import CustomDrawer from './src/components/CustomDrawer';
+import FavMealContextProvider from './src/store/context/Contex';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -21,6 +28,11 @@ const DrawerRouter = () => {
         headerTintColor: 'white',
         drawerActiveTintColor: '#2E2319',
         drawerActiveBackgroundColor: '#C29A5D',
+        headerRight: () => {
+          <TouchableOpacity>
+            <Text style={{color: 'white'}}>FAV</Text>
+          </TouchableOpacity>;
+        },
       }}>
       <Drawer.Screen
         name="CategoriesAll"
@@ -41,25 +53,28 @@ const App = () => {
   return (
     <>
       <StatusBar barStyle={'light-content'} />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-            headerStyle: {alignSelf: 'center'},
-          }}>
-          <Stack.Screen
-            name="AllCategories"
-            component={DrawerRouter}
-            options={{title: 'Categories'}}
-          />
-          <Stack.Screen
-            name="CategoryDetails"
-            component={CategoryDetails}
-            // options={{title: 'Meals Overview'}}
-          />
-          <Stack.Screen name="mealDetails" component={MealDetails} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <FavMealContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: true,
+              headerStyle: {backgroundColor: '#714209'},
+              headerTintColor: 'white',
+            }}>
+            <Stack.Screen
+              name="Drawer"
+              component={DrawerRouter}
+              options={{title: 'Categories', headerShown: false}}
+            />
+            <Stack.Screen
+              name="CategoryDetails"
+              component={CategoryDetails}
+              // options={{title: 'Meals Overview'}}
+            />
+            <Stack.Screen name="mealDetails" component={MealDetails} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavMealContextProvider>
     </>
   );
 };

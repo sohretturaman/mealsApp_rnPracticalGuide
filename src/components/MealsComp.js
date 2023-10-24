@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import SubTitlesComp from './SubTitlesComp';
 
 const MealsComp = props => {
-  // console.log('image', props.imageUrl);
+  //console.log('it is worked for fav', props.title);
 
   const navigation = useNavigation();
   const handlePress = () => {

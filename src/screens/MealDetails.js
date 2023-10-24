@@ -1,17 +1,49 @@
-import {StyleSheet, Text, View, Image, FlatList} from 'react-native';
-import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  FlatList,
+  Pressable,
+  Button,
+} from 'react-native';
+import React, {useContext, useEffect, useLayoutEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {MEALS} from '../data/dummy-data';
 import ListComponent from '../components/ListComponent';
 import {ScrollView} from 'react-native-virtualized-view';
 import SubTitlesComp from '../components/SubTitlesComp';
+import {Context} from '../store/context/Contex';
 
-const MealDetails = () => {
-  const route = useRoute();
+const MealDetails = ({route, navigation}) => {
+  const FavMealsContex = useContext(Context);
   const mealId = route.params.mealId;
-
   const data = MEALS.find(item => item.id === mealId);
-  // console.log('data from meals,image', data.imageUrl);
+
+  const isMealFav = FavMealsContex.ids.includes(mealId); //!! contexteki değerler yerine
+  //value kısmındaki değerler de çalışıyor
+
+  const ChangeFavStatus = () => {
+    if (isMealFav) {
+      FavMealsContex.DelFalMeal(mealId);
+    }
+    if (!isMealFav) {
+      FavMealsContex.AddFavMeal(mealId);
+    }
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button
+          title={isMealFav === true ? 'faved' : 'notFav'}
+          color="black"
+          style={{margin: 10}}
+          onPress={ChangeFavStatus}
+        />
+      ),
+    });
+  }, [navigation, ChangeFavStatus]); //'!!! very important when you update the function here the fav icon is working properly
 
   return (
     <ScrollView>
@@ -26,6 +58,7 @@ const MealDetails = () => {
             style={styles.subtitleColor}
           />
         </View>
+
         <Text style={styles.title}>{data.title}</Text>
 
         <View style={styles.contentWrapper}>
