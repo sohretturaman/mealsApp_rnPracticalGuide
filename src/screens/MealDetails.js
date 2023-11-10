@@ -13,22 +13,29 @@ import {MEALS} from '../data/dummy-data';
 import ListComponent from '../components/ListComponent';
 import {ScrollView} from 'react-native-virtualized-view';
 import SubTitlesComp from '../components/SubTitlesComp';
-import {Context} from '../store/context/Contex';
+import {useDispatch, useSelector} from 'react-redux';
+//import {Context} from '../store/context/Contex';
+import {AddToFav, DelFromFavs} from '../store/redux/FavsSlice';
 
 const MealDetails = ({route, navigation}) => {
-  const FavMealsContex = useContext(Context);
+  // const FavMealsContex = useContext(Context);
   const mealId = route.params.mealId;
   const data = MEALS.find(item => item.id === mealId);
 
-  const isMealFav = FavMealsContex.ids.includes(mealId); //!! contexteki değerler yerine
-  //value kısmındaki değerler de çalışıyor
+  // const isMealFav = FavMealsContex.ids.includes(mealId); //!! contexteki değerler yerine
+  const FavouriteMealIds = useSelector(state => state.FavMeals.favIds);
+  const isMealFav = FavouriteMealIds.includes(mealId);
+
+  const dispatch = useDispatch();
 
   const ChangeFavStatus = () => {
     if (isMealFav) {
-      FavMealsContex.DelFalMeal(mealId);
+      //FavMealsContex.DelFalMeal(mealId);
+      dispatch(DelFromFavs({id: mealId}));
     }
     if (!isMealFav) {
-      FavMealsContex.AddFavMeal(mealId);
+      //FavMealsContex.AddFavMeal(mealId);
+      dispatch(AddToFav({id: mealId}));
     }
   };
 

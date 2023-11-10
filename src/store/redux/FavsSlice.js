@@ -10,7 +10,7 @@ const FavSlice = createSlice({
             state.favIds.push(action.payload.id) // ask for id 
         },
         DeleteFav:(state,action)=> {
-            state.favIds.splice(action.payload.id)
+            state.favIds.splice(state.favIds.indexOf(action.payload.id)+1) // find the index of item
         }
     }
 
