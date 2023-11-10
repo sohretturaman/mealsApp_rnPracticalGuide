@@ -3,10 +3,13 @@ import React, {useContext} from 'react';
 import {MEALS} from '../data/dummy-data';
 import {Context} from '../store/context/Contex';
 import MealsComp from '../components/MealsComp';
+import {useDispatch, useSelector} from 'react-redux';
 
 const FavouriteScreen = () => {
-  const FavMealsCntxt = useContext(Context);
-  const favMeals = MEALS.filter(meal => FavMealsCntxt.ids.includes(meal.id));
+  // const FavMealsCntxt = useContext(Context);
+  const favMealIDS = useSelector(state => state.FavMeals.favIds); // my data array from redux
+  // const favMeals = MEALS.filter(meal => FavMealsCntxt.ids.includes(meal.id));
+  const favMeals = MEALS.filter(meal => favMealIDS.includes(meal.id));
 
   const renderItem = favMeal => {
     const data = favMeal.item;
