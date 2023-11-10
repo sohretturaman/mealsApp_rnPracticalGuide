@@ -15,6 +15,8 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import FavouriteScreen from './src/screens/FavouriteScreen';
 import CustomDrawer from './src/components/CustomDrawer';
 import FavMealContextProvider from './src/store/context/Contex';
+import { Provider } from 'react-redux';
+import Store from './src/store/redux/Store';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -53,7 +55,8 @@ const App = () => {
   return (
     <>
       <StatusBar barStyle={'light-content'} />
-      <FavMealContextProvider>
+      {/*<FavMealContextProvider>*/}
+      <Provider store={Store}>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
@@ -74,7 +77,8 @@ const App = () => {
             <Stack.Screen name="mealDetails" component={MealDetails} />
           </Stack.Navigator>
         </NavigationContainer>
-      </FavMealContextProvider>
+        </Provider>
+      {/*</FavMealContextProvider>*/}
     </>
   );
 };
