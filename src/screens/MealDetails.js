@@ -6,8 +6,9 @@ import {
   FlatList,
   Pressable,
   Button,
+  TouchableOpacity,
 } from 'react-native';
-import React, {useContext, useEffect, useLayoutEffect} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {MEALS} from '../data/dummy-data';
 import ListComponent from '../components/ListComponent';
@@ -25,15 +26,21 @@ const MealDetails = ({route, navigation}) => {
   // const isMealFav = FavMealsContex.ids.includes(mealId); //!! contexteki değerler yerine
   const FavouriteMealIds = useSelector(state => state.FavMeals.favIds);
   const isMealFav = FavouriteMealIds.includes(mealId);
+  console.log('is meal fav value', isMealFav);
+
+  const [isFav, setIsFav] = useState(isMealFav);
 
   const dispatch = useDispatch();
 
   const ChangeFavStatus = () => {
-    if (isMealFav) {
+    console.log('it is clicked', isFav);
+
+    setIsFav(!isFav);
+    if (isFav) {
       //FavMealsContex.DelFalMeal(mealId);
       dispatch(DelFromFavs({id: mealId}));
     }
-    if (!isMealFav) {
+    if (!isFav) {
       //FavMealsContex.AddFavMeal(mealId);
       dispatch(AddToFav({id: mealId}));
     }
@@ -42,15 +49,22 @@ const MealDetails = ({route, navigation}) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button
-          title={isMealFav === true ? 'faved' : 'notFav'}
-          color="black"
-          style={{margin: 10}}
-          onPress={ChangeFavStatus}
-        />
+        <TouchableOpacity onPress={ChangeFavStatus}>
+          {isFav === true ? (
+            <Image
+              style={{margin: 10, height: 25, width: 25}}
+              source={require('../assets/star.png')}
+            />
+          ) : (
+            <Image
+              style={{margin: 10, height: 25, width: 25}}
+              source={require('../assets/stare.png')}
+            />
+          )}
+        </TouchableOpacity>
       ),
     });
-  }, [navigation, ChangeFavStatus]); //'!!! very important when you update the function here the fav icon is working properly
+  }, [navigation, ChangeFavStatus, isFav]); //'!!! very important when you update the function here the fav icon is working properly
 
   return (
     <ScrollView>

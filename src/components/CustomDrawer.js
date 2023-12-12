@@ -11,14 +11,14 @@ const CustomDrawer = props => {
       <DrawerContentScrollView
         {...props}
         contentContainerStyle={{
-          backgroundColor: '#7B400C',
+          backgroundColor: '#54300F',
         }}>
         <View style={styles.profileWrapper}>
           {/**profile part  */}
-          <Text style={styles.userName}>Şöhret Turaman</Text>
+          <Text style={styles.userName}>Meryem Şöhret</Text>
         </View>
 
-        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#C29A5D'}}>
+        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#EAE8F1'}}>
           {' '}
           Screens{' '}
         </Text>
@@ -34,14 +34,14 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#352B1D',
+    color: '#F5F2EC',
     marginLeft: 10,
     paddingVertical: 40,
   },
-  drawerContainer: {flex: 1, backgroundColor: '#7B400C'},
+  drawerContainer: {flex: 1, backgroundColor: '#54300F'},
   profileWrapper: {
     marginBottom: 15,
-    backgroundColor: '#C29A5D',
+    backgroundColor: '#54300F',
     borderRadius: 10,
   },
 });

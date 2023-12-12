@@ -18,7 +18,7 @@ const FavouriteScreen = () => {
   };
 
   return (
-    <View>
+    <View style={{backgroundColor: '#482A15', flex: 1}}>
       <FlatList data={favMeals} renderItem={renderItem} />
     </View>
   );

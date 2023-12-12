@@ -15,7 +15,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import FavouriteScreen from './src/screens/FavouriteScreen';
 import CustomDrawer from './src/components/CustomDrawer';
 import FavMealContextProvider from './src/store/context/Contex';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import Store from './src/store/redux/Store';
 
 const Stack = createStackNavigator();
@@ -28,8 +28,9 @@ const DrawerRouter = () => {
       screenOptions={{
         headerStyle: {backgroundColor: '#714209'},
         headerTintColor: 'white',
-        drawerActiveTintColor: '#2E2319',
+        drawerActiveTintColor: 'black',
         drawerActiveBackgroundColor: '#C29A5D',
+        drawerInactiveTintColor: 'white',
         headerRight: () => {
           <TouchableOpacity>
             <Text style={{color: 'white'}}>FAV</Text>
@@ -44,9 +45,7 @@ const DrawerRouter = () => {
       <Drawer.Screen
         name="Favourites"
         component={FavouriteScreen}
-        options={{
-          drawerIcon: () => <Text style={{color: 'black'}}>#</Text>,
-        }}
+        // options={{ drawerIcon: () => <Text style={{color: 'white'}}>#</Text> }}
       />
     </Drawer.Navigator>
   );
@@ -77,7 +76,7 @@ const App = () => {
             <Stack.Screen name="mealDetails" component={MealDetails} />
           </Stack.Navigator>
         </NavigationContainer>
-        </Provider>
+      </Provider>
       {/*</FavMealContextProvider>*/}
     </>
   );
