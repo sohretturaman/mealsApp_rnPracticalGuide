@@ -1,7 +1,6 @@
 #react native meal app 
 
-
-https://github.com/sohretturaman/meals_app_react_native/assets/81382575/de36da16-0efb-430f-8f89-a983931ae748
+https://github.com/sohretturaman/meals_app_react_native/assets/81382575/0f8864b0-2f16-4397-86ae-cf12322e2023
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
